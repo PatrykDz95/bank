@@ -40,6 +40,9 @@ jobs:
         sudo mv migrate.linux-amd64 /usr/bin/migrate
         which migrate
 
+    - name: Create postgres
+      run: make postgres
+
     - name: Create db
       run: make createdb
 
