@@ -44,9 +44,6 @@ jobs:
       run: |
         PGPASSWORD=secret createdb -h localhost -U root bank
 
-    - name: Create db
-      run: make createdb
-
     - name: Run migrations
       run: make migrateup
 
