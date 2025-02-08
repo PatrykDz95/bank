@@ -45,10 +45,10 @@ jobs:
         PGPASSWORD=secret createdb -h localhost -U root bank
 
     - name: Run migrations down
-      run: make migratedown -force
+      run: migrate -path db/migration -database "postgres://root:secret@localhost:5432/bank?sslmode=disable" -verbose down -force
 
     - name: Run migrations up
-      run: make migrateup
+      run: migrate -path db/migration -database "postgres://root:secret@localhost:5432/bank?sslmode=disable" -verbose up
 
     - name: Test
       run: make test
