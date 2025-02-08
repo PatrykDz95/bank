@@ -33,7 +33,14 @@ jobs:
       uses: actions/setup-go@v4
       with:
         go-version: ^1.23
-        
+
+    - name: Drop all tables in PostgreSQL Database
+      run: |
+        psql -U root -d simple_bank -c "DROP SCHEMA public CASCADE;"
+        psql -U root -d simple_bank -c "CREATE SCHEMA public;"
+      env:
+        PGPASSWORD: secret
+
     - name: Install golang-migrate
       run: |
         curl -L https://github.com/golang-migrate/migrate/releases/download/v4.14.1/migrate.linux-amd64.tar.gz | tar xvz
