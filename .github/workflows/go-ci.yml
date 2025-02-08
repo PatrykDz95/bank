@@ -45,7 +45,7 @@ jobs:
         PGPASSWORD=secret createdb -h localhost -U root bank
 
     - name: Run migrations down
-      run: make migratedown
+      run: make migratedown -force
 
     - name: Run migrations up
       run: make migrateup
