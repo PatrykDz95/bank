@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	pq "github.com/lib/pq"
+	"github.com/lib/pq"
 )
 
 type createAccountRequest struct {
