@@ -3,11 +3,10 @@ package api
 import (
 	db "bank/db/sqlc"
 	"database/sql"
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/lib/pq"
+	pq "github.com/lib/pq"
 )
 
 type createAccountRequest struct {
@@ -34,12 +33,13 @@ func (server *Server) createAccount(c *gin.Context) {
 			case "unique_violation", "foreign_key_violation":
 				c.JSON(http.StatusForbidden, errorResponse(err))
 				return
+			}
+			c.JSON(http.StatusInternalServerError, errorResponse(err))
+			return
 		}
-		c.JSON(http.StatusInternalServerError, errorResponse(err))
-		return
-	}
 
-	c.JSON(http.StatusOK, account)
+		c.JSON(http.StatusOK, account)
+	}
 }
 
 type getAccountRequest struct {
